@@ -31,7 +31,7 @@ def sort_of_date(json_datas):
         return ''
 
 if __name__ == '__main__':
-    search_dict = {'ti':'Voice', 'abs':'Voice', 'cat':'Computer Science'}
+    search_dict = {'abs':'generative', 'cat':'Computer Science'}
     url = search_maker(search_dict)
     data = get_arxiv(url)
     #print(data)
