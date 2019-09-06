@@ -23,8 +23,12 @@ def search_maker(search_dict):
 
 def data_dict_maker(datas, use_datas=['title', 'published', 'link']):
     data_dict = dict()
-    for i in datas.find_all('title'):
-        data_dict['title'] = i
+    titles = datas.find_all('title')[1:]
+    dates = datas.find_all('published')
+    links = datas.find_all('link', attrs={'title':'pdf'})
+    for i in range(len(titles)):
+        data_dict.setdefault(['title':titles[i], 'date':dates[i], 'link':links[i]])
+    return data_dict
 
 def sort_of_date(json_datas):
     for out in data.find_all(''):
@@ -35,6 +39,7 @@ if __name__ == '__main__':
     url = search_maker(search_dict)
     data = get_arxiv(url)
     #print(data)
-    #data_json_maker(data)
-    for out in data.find_all('link', attrs={'title':'pdf'}):
-        print(out)
+    data_dict = data_dict_maker(data)
+    print(data_dict)
+    #for out in data.find_all('link', attrs={'title':'pdf'}):
+    #    print(out)
